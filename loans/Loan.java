@@ -45,6 +45,7 @@ public abstract class Loan implements Serializable {
 	}
 	
 	private void setPayDay(int whatYear, int whatMonth, int whatDay) {
+		// Rather than calling set and then get, I suggest you instead have your set method return the value it created
 		DateManagement.setManualDate(whatYear, whatMonth, whatDay);
 		payDay = DateManagement.getManualDate();
 	}
@@ -99,12 +100,14 @@ public abstract class Loan implements Serializable {
 	}
 	
 	public void makeMonthlyPayment(Account fromAccount) {
+		// You probably want some exception handling in this method
 		fromAccount.withdraw(MINIMUM_MONTHLY_PAYMENT);
 		Master.deposit(MINIMUM_MONTHLY_PAYMENT);
 		balanceRemainingActual -= MINIMUM_MONTHLY_PAYMENT;
 	}
 	
 	public void makeManualPayment(Account fromAccount, double amount) {
+		// You probably want some exception handling in this method
 		fromAccount.withdraw(amount);
 		Master.deposit(amount);
 		balanceRemainingActual -= amount;

@@ -30,6 +30,7 @@ public class DateManagement {
 		return currentDate;
 	}
 	
+	// I suggest you have this method return the date that you are creating due to the complext logic you have
 	public static void setExpirationDate(String when, int howMany) {
 		switch(when) {
 			case "year": expirationDate = new GregorianCalendar(year + howMany, month, day);
@@ -53,6 +54,8 @@ public class DateManagement {
 		}
 	}
 	
+	// The naming convention of your variables isn't consistent w/ your other variable. Just use year, month, day
+	// I also think this method should return the created values
 	public static void setManualDate(int theYear, int theMonth, int theDay) {
 		manualDate = new GregorianCalendar(theYear, theMonth, theDay);
 	}
