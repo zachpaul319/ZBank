@@ -1,6 +1,8 @@
 package extra;
 import java.io.*;
 
+import accounts.CheckingAccount;
+import accounts.SavingsAccount;
 import cards.DebitCard;
 
 public class BankTester {
@@ -15,7 +17,7 @@ public class BankTester {
 		System.out.println(checkingAccount.getAccountName());
 		System.out.printf("$%.2f\n", checkingAccount.getBalance());
 		System.out.println(checkingAccount.getAccountNumber());
-		
+		/* 
 		System.out.println();
 		
 		System.out.println(savingsAccount.getAccountName());

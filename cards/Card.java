@@ -14,29 +14,34 @@ public abstract class Card implements Serializable {
 		CARD_NUMBER = Math.abs(rand.nextLong());
 		
 		EXPIRATION_DATE = findExpirationDate();
-		
-		// This method is doing too many things.
-		// Refactor to put the setting of the CVV into a separate method and call that method from here
-		// Refactor to put the setting of the PIN into a separate method and call that method from here
+
+		CVV = generateCVV();
+
+		PIN = generatePIN();
+	}
+
+	private String generateCVV() {
+		Random rand = new Random();
 		Integer randCVV = rand.nextInt(1000);
 		if (randCVV >= 100) {
-			CVV = randCVV.toString();
+			return randCVV.toString();
 		} else {
-			CVV = String.format("%03d", randCVV);
+			return String.format("%03d", randCVV);
 		}
-		
+	}
+
+	private String generatePIN() {
+		Random rand = new Random();
 		Integer randPIN = rand.nextInt(10000);
 		if (randPIN >= 1000) {
-			PIN = randPIN.toString();
+			return randPIN.toString();
 		} else {
-			PIN = String.format("%04d", randPIN);
+			return String.format("%04d", randPIN);
 		}
 	}
 	
 	private String findExpirationDate() {
-		// Rather than calling set and then get, I suggest you instead have your set method return the value it created
-		DateManagement.setExpirationDate("year", 5);
-		return DateManagement.getFormattedDate(DateManagement.getExpirationDate());
+		return DateManagement.getFormattedDate(DateManagement.getExpirationDate("year", 5));
 	}
 	
 	public long getCardNumber() {

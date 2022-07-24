@@ -40,14 +40,11 @@ public abstract class Loan implements Serializable {
 	}
 	
 	private void setPayDay() {
-		DateManagement.setExpirationDate("month", 1);
-		payDay = DateManagement.getExpirationDate();
+		payDay = DateManagement.getExpirationDate("month", 1);
 	}
 	
 	private void setPayDay(int whatYear, int whatMonth, int whatDay) {
-		// Rather than calling set and then get, I suggest you instead have your set method return the value it created
-		DateManagement.setManualDate(whatYear, whatMonth, whatDay);
-		payDay = DateManagement.getManualDate();
+		payDay = DateManagement.getManualDate(whatYear, whatMonth, whatDay);
 	}
 	
 	public double getLoanAmount() {
