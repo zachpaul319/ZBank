@@ -97,14 +97,12 @@ public abstract class Loan implements Serializable {
 	}
 	
 	public void makeMonthlyPayment(Account fromAccount) {
-		// You probably want some exception handling in this method
 		fromAccount.withdraw(MINIMUM_MONTHLY_PAYMENT);
 		Master.deposit(MINIMUM_MONTHLY_PAYMENT);
 		balanceRemainingActual -= MINIMUM_MONTHLY_PAYMENT;
 	}
 	
 	public void makeManualPayment(Account fromAccount, double amount) {
-		// You probably want some exception handling in this method
 		fromAccount.withdraw(amount);
 		Master.deposit(amount);
 		balanceRemainingActual -= amount;

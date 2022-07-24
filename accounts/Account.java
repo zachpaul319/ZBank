@@ -43,8 +43,6 @@ public abstract class Account implements Serializable {
 	}
 	
 	public void transferMoney(Account whichAccount, double amount) {
-		// What if the deposit fails for some reason?  For example, what if whichAccount is null?
-		// How can you change this code to only withdraw the mony on a successful transfer
 		whichAccount.deposit(amount);
 		withdraw(amount);
 	}
