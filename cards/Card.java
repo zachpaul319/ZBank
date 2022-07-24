@@ -15,6 +15,9 @@ public abstract class Card implements Serializable {
 		
 		EXPIRATION_DATE = findExpirationDate();
 		
+		// This method is doing too many things.
+		// Refactor to put the setting of the CVV into a separate method and call that method from here
+		// Refactor to put the setting of the PIN into a separate method and call that method from here
 		Integer randCVV = rand.nextInt(1000);
 		if (randCVV >= 100) {
 			CVV = randCVV.toString();
@@ -31,6 +34,7 @@ public abstract class Card implements Serializable {
 	}
 	
 	private String findExpirationDate() {
+		// Rather than calling set and then get, I suggest you instead have your set method return the value it created
 		DateManagement.setExpirationDate("year", 5);
 		return DateManagement.getFormattedDate(DateManagement.getExpirationDate());
 	}
