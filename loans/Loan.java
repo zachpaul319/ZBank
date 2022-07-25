@@ -14,10 +14,12 @@ public abstract class Loan implements Serializable {
 	protected GregorianCalendar payDay;
 	protected double balanceRemainingActual, balanceRemainingShouldBe;
 	protected int monthsPassed;
+	protected boolean active;
 	
 	public Loan(Account accountTo, double loanAmount, double interestRate, int term) {
+		active = true;
+
 		LOAN_AMOUNT = loanAmount;
-		
 		accountTo.deposit(loanAmount);
 		Master.withdraw(loanAmount);
 		
@@ -33,7 +35,6 @@ public abstract class Loan implements Serializable {
 		STARTING_DAY = DateManagement.getDay();
 		
 		MINIMUM_MONTHLY_PAYMENT = (TOTAL_AMOUNT_DUE / TERM) / 12;
-		
 		monthsPassed = 0;
 		
 		setPayDay();
@@ -107,6 +108,14 @@ public abstract class Loan implements Serializable {
 		Master.deposit(amount);
 		balanceRemainingActual -= amount;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void cancel() {
+		active = false;
+	}
 	
 	private boolean isPayDay() {
 		return (DateManagement.getCurrentDate() == payDay);
@@ -124,7 +133,7 @@ public abstract class Loan implements Serializable {
 		if (isOrPastPayDay()) {
 			monthsPassed += 1;
 			if (missedPayment()) {
-				//do something
+				cancel();
 			} else {
 				if (isPayDay()) {
 					setPayDay();

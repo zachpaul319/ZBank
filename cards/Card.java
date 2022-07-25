@@ -8,8 +8,11 @@ public abstract class Card implements Serializable {
 	private static final long serialVersionUID = 6;
 	protected final long CARD_NUMBER;
 	protected final String EXPIRATION_DATE, CVV, PIN;
+	protected boolean active;
 	
 	public Card() {
+		active = true;
+
 		Random rand = new Random();
 		CARD_NUMBER = Math.abs(rand.nextLong());
 		
@@ -62,6 +65,10 @@ public abstract class Card implements Serializable {
 	
 	public boolean isExpired() {
 		return DateManagement.getCurrentDate().after(DateManagement.getExpirationDate());
+	}
+
+	public void deactivate() {
+		active = false;
 	}
 	
 }
